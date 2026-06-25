@@ -1,0 +1,57 @@
+//import logo from './logo.svg';
+import './App.css';
+
+import React, { Component } from 'react'
+import NavBar from './NavBar';
+//here NavBar is not inside components folder else 
+// import NavBar from './components/NavBar';
+import News from './News';
+import NewsItem from './NewsItem';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+/*
+V.imp this all is taken from news API doc where as per cateory the url changes with apiKey const
+
+Pass this as props 
+
+//Tech-Headlines
+https://newsdata.io/api/1/latest? 
+  apikey=pub_82cca6454fb54bf5bb4fc11d72a0947c
+  &country=us
+  &category=technology
+
+
+//Positive tesla coverage
+  https://newsdata.io/api/1/latest? 
+  apikey=pub_82cca6454fb54bf5bb4fc11d72a0947c
+  &q=tesla
+  &category=business
+  &sentiment=positive
+
+//Climate chnage updates
+  https://newsdata.io/api/1/archive? 
+  apikey=pub_82cca6454fb54bf5bb4fc11d72a0947c
+  &q=climate change
+  &from_date=2025-09-30
+
+
+  //Global market url format:
+  https://newsdata.io/api/1/market? 
+  apikey=pub_82cca6454fb54bf5bb4fc11d72a0947c
+  &q=market
+  &language=en
+  &sort=pubdateasc
+  &size=5
+*/
+
+
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        <NavBar/>
+        <News country='in' category='sports'/>
+       
+      </div>
+    )
+  }
+}

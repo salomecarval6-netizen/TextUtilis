@@ -7,7 +7,7 @@ let color;
     <> {/*text imp 
     // 2. Use template literals `` to dynamically change classes based on props.mode
     // Best practice for checkboxes: use onChange instead of onClick */} 
-    <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'}  toggleMode={toggleMode}`}>
+    <div className={`form-check form-switch text-${props.mode==='light'?'dark':'light'} `} onClick={()=>{props.toggleMode()}}>
       <input className="form-check-input" type="checkbox" onChange={props.toggleMode} role="switch" checked={props.mode === 'dark'} id="switchCheckDefault"/>
       <label className="form-check-label" htmlFor="switchCheckDefault">Enable {props.mode === 'light' ? 'Dark' : 'Light'} Mode</label>
     </div>
@@ -23,8 +23,6 @@ let color;
 The user selects the color directly by clicking a specific button inside your child component (like SwitchBtn.js), 
 and that button sends the color choice back up to App.js
 */}
-
-    <button type="button" class="btn btn-primary" onClick={() => props.toggleMode('red')}>red</button>
 
     </>
     

@@ -9,7 +9,8 @@ const capitalize=(text)=>{
 
   return (
     <>
-  
+  {/*Imp to set so as to prevent changing the layout when alert disappers */}
+  <div style={{height:'50px'}}>
     {/*The Core Alert Utilities (alert alert-warning)alert: This is the base Bootstrap utility class. It strips away standard paragraph margins, sets a comfortable font size, and adds uniform padding and a subtle border radius around the inner text [Sentry].
     alert-warning: This applies the color theme [Sentry]. In Bootstrap's default design palette, "warning" styles the container with a soft yellow/amber background, dark yellow text, and a matching amber border. It is typically used to draw attention to important notices or caution flags.
     2. The Close Button Configuration (alert-dismissible fade show)alert-dismissible: This class reserves extra padding on the far right side of the container box [Sentry]. This ensures that any long text lines do not accidentally crash into or clip underneath the close button icon.
@@ -28,7 +29,7 @@ const capitalize=(text)=>{
     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>*/}
     </div>
     }
-
+</div>
     </>
 
   )

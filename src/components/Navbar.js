@@ -23,11 +23,11 @@ import { Link } from 'react-router-dom'; // Imported Link to prevent reloads
 export default function Navbar(props) {
   return (
     <>
-    <h1>{props.title}</h1>
+    <h1 style={{ color: props.mode === 'light' ? '#001524' : 'white' }}>{props.title}</h1>
 {/*1. ADDED: The outer nav container with expand classes to force visibility*/}
-<nav className="navbar navbar-expand-lg bg-body-tertiary"
-style={{backgroundColor:props.mode==='light'?'white':'black',
-                  color:props.mode==='light'?'black':'white'}}>
+<nav className={`navbar navbar-expand-lg navbar-${props.mode==='light'?'light':'dark'} `}
+  style={{ backgroundColor: props.mode === 'light' ? 'white' : '#001524' }}>
+
   <div className="container-fluid">
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
@@ -50,6 +50,28 @@ style={{backgroundColor:props.mode==='light'?'white':'black',
 </>
   )
 }
+{/*
+<div className='d-flex'>     
+  onClick requires a function and a f(x) call thus props.toggleMode('color') is wrong 
+  <div className="bg-primary rounded mx-2" onClick={()=>{
+                                      props.toggleMode('blue')}} 
+    style={{height:'30px',width:'30px',cursor:'pointer'}}></div>
+
+  <div className="bg-danger rounded mx-2" onClick={()=>{
+                                      props.toggleMode('red')}} 
+    style={{height:'30px',width:'30px',cursor:'pointer'}}></div>
+  
+  <div className="bg-success rounded mx-2" onClick={()=>{
+                                      props.toggleMode('green')}}
+    style={{height:'30px',width:'30px',cursor:'pointer'}}></div>
+                                      
+  <div className="bg-warning rounded mx-2" onClick={()=>{
+                                      props.toggleMode('yellow')}}
+    style={{height:'30px',width:'30px',cursor:'pointer'}}></div>
+ */}
+
+
+
 
 //tells about prop types
 Navbar.propTypes={   //small p

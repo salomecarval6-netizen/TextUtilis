@@ -1,19 +1,14 @@
 //import logo from './logo.svg';
 import './App.css';   //to apply all css into our webpage
 import Navbar from './components/Navbar';
-import Toggle from './components/Toggle';
+//import Toggle from './components/Toggle';
 import TextForm from './components/TextForm';
 import SwitchBtn from './components/SwitchBtn';
 import Alert from './components/Alert'; 
 import { useState } from 'react';
 import About from './components/About';
 //no import React from "react" needed. The build tools handle JSX automatically
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter,Routes,Route,Link} from "react-router-dom";
 
 
 /* If each component had its own mode state, they could get out of sync thus put shared
@@ -25,11 +20,11 @@ function App() {
   const[alert,setAlert]=useState(null);
 //alert is an object which is set null initially
 
-  const toggleMode=(color)=>{
+  const toggleMode=()=>{
     if(mode==='light')
     {
       setMode('dark');
-      document.body.style.backgroundColor=color || 'black';
+      document.body.style.backgroundColor='#001524';
       showAlert("Dark mode has been enabled","success");
       //to give dynamic title
       document.title='Dark Mode';
@@ -69,24 +64,15 @@ function App() {
     },2000)
   }
 
-
-
-  
-        
-       
-
-         
-
-
   return (
     <>
   {/* Move BrowserRouter to the top if Navbar or other components need to use router links */}
   <BrowserRouter>
 
     {/* The d-flex wrapper aligns all child switches horizontally */}
-    <div className="d-flex flex-wrap gap-4 align-items-center justify-content-start my-3">
+
       <SwitchBtn mode={mode} toggleMode={toggleMode}/>
-    </div>
+    
     {/* 
     // Left side: The name the Child component will use to read the data
     // Right side: The actual state variable living in App.js
@@ -111,15 +97,15 @@ function App() {
     */}
 
       {/* Router Viewport: Only the active route displays here */}
-    <div className="container my-3">
+    <div className="mb-2">
       <Routes>
         {/* Fixed the lowercase 'f' typo to match your import */}
         <Route path="/" element={<TextForm heading="TextForm" mode={mode} showAlert={showAlert}/>} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={<About mode={mode} toggleMode={toggleMode} />} />
       </Routes>
     </div>
 
-      <Toggle mode={mode} toggleMode={toggleMode}/>
+     {/* <Toggle mode={mode} toggleMode={toggleMode}/>  */}
     </BrowserRouter>
     </>
   );
@@ -130,7 +116,7 @@ function App() {
 export default App;
 
 
-/*A]to Create a New Page:
+/*A] to Create a New Page:
 Create the Component.  components/Pricing.js
 export default function Pricing() { return <h1>Pricing</h1> }
 

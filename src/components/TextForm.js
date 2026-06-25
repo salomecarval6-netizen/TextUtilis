@@ -84,23 +84,33 @@ const alternateText = (event) => {
 
 // Dynamically calculate the matching text styling color for this form container
   const textStyleColor = props.mode === 'dark' ? 'white' : 'black';
-  const btnTheme='primary';
+  let btnTheme='info';
+
+  if(props.mode==='dark')
+  {
+    btnTheme='light'
+  }
+  else
+  {
+    btnTheme='secondary';
+  } 
 
   return (
   <>
 
     <form style={{color:textStyleColor}}>
-    <h1>{props.heading}</h1>
+    
 
     {/*mx-auto stands for "Margin Horizontal Auto". It is used to automatically center a 
     block-level element horizontally inside its parent container
     w-50 stands for "Width 50%". */}
 
-    <div className="mb-3 w-75 p-3 rounded"
+    <div className="w-100 p-3 rounded"
       style={{ fontSize: `${fontSize}px`,
-                  
-                  color:props.mode==='light'?'white':'black'}} >
-
+                  backgroundColor:props.mode==='light'?'white':'#001524',
+                  color:props.mode==='light'?'black':'white'}} >
+      
+      <h1>{props.heading}</h1>
       {/*backgroundColor:props.mode==='light'?'black':'white', no need in above */}
       {/*the <label> element represents a caption or text description for a user interface item. 
       It tells both the user and the browser what information should be entered into a specific 
@@ -119,7 +129,7 @@ const alternateText = (event) => {
     {/*mb-3 stands for "Margin Bottom 3"*/} 
         <textarea className="text" placeholder="Enter text here..." value={text} onChange={handleOnChange} id="myBox" 
           style={{color:boxColor}}
-          rows="4"
+          rows="7" 
           // 2. Link the inline style directly to your fontSize state variable
           //{used to show {use to write js obj} javascript} thus {{}}
         >
@@ -133,18 +143,20 @@ const alternateText = (event) => {
  The ternary operator is the STYLE (the data): Its job is to figure out what color the button should look like right now.
  */}
 
-
-  <div className="d-flex flex-wrap gap-2 mb-3"
-  style={{backgroundColor:props.mode==='light'?'white':'black',
-                  color:props.mode==='light'?'black':'white'}}>
+{/* the text color of the buttons will not change based on the color property applied to the outer <div>.
+text-${props.mode === 'light' ? 'dark' : 'light'} write this inside className
+*/}
+  <div className="d-flex flex-wrap gap-2 mb-3 mx-1 my-1"
+  style={{backgroundColor:props.mode==='light'?'white':'#001524',
+                  }}>
     {/*d-flex: This activates the CSS Flexbox layout engine. It forces all immediate child elements (your buttons) to sit perfectly flat in a horizontal row by default.
     flex-wrap: This is crucial for responsive design. If your user views the page on a small screen (like a smartphone), this class allows the buttons to neatly drop down to a second row instead of cutting off or stretching off the screen.
     gap-2: This replaces the old mx-3 setup. It adds clean, uniform spacing between all buttons horizontally and vertically, without needing margins on individual items.
     mb-3: Adds standard spacing beneath the entire row of buttons so they do not crowd your word counter section */}
-        <button type="button" className={`btn btn-${btnTheme}`}  onClick={changeSize
+        <button type="button" className={`btn btn-${btnTheme} `}  onClick={changeSize
         }>Resize</button>
      
-        <button type="button" className={`btn btn-${btnTheme}`}  onClick={handleCopyText}>COPY</button>
+        <button type="button" className={`btn btn-${btnTheme}`}  onClick={handleCopyText}>Copy</button>
     
         <button type="button" className={`btn btn-${btnTheme}`}  onClick={removeExtraSpaces}>Remove Blank</button>
  
@@ -153,12 +165,12 @@ const alternateText = (event) => {
     
         <button type="button" className={`btn btn-${btnTheme}`}  onClick={changeColor}>GREEN</button>
     
-        <button type="button" className={`btn btn-${btnTheme}`}  onClick={alternateText}>alternateText</button>
+        <button type="button" className={`btn btn-${btnTheme}`}  onClick={alternateText}>AlternateText</button>
   
   </div>
 
 
-    <button type="submit" className={`btn btn-${btnTheme}`}>Submit</button>
+    <button className='mb-3' type="submit" className={`btn btn-${btnTheme}`}>Submit</button>
     {/* btn (STRUCTURE) btn-primary (STYLING)
     
     btn-success: Turns green (used for save, success, or positive actions).
@@ -166,14 +178,23 @@ const alternateText = (event) => {
     btn-warning: Turns yellow (used for warnings or caution).
     btn-secondary: Turns gray (used for neutral or alternative choices)
     */}
-    <div className='container' 
-    style={{backgroundColor:props.mode==='light'?'white':'black',
-                  color:props.mode==='light'?'black':'white'}}>
-      <h1>Word Counter</h1>
-      <p>{text.length && text.split(" ").length} words and {text.length} characters</p>
-      <p>{0.008 * text.split(" ").length} Minutes to read</p>
-      <h2>Preview</h2>
-      <p>{text.length>0?text:"Enter something to preview it here"}</p>
+    <div className='mt-5' 
+    style={{backgroundColor:props.mode==='light'?'white':'#001524',
+                  color:props.mode==='light'?'#001524':'white'}}>
+      <h1 >Word Counter</h1>
+      <p>{text.split(/\s+/).filter((element)=>{
+              return element.length!==0
+              }).length} words and {text.length} characters</p>
+
+
+    {/* filter will only pass element from array which satisfy the function */}
+      <p>{0.008 * text.split(" ").filter((element)=>{
+              return element.length!==0
+              }).length} Minutes to read</p>
+      <div className="mt-5">
+        <h2>Preview</h2>
+        <p>{text.length>0?text:"Enter something to preview it here"}</p>
+      </div>
     </div>
     </form>
   </>
